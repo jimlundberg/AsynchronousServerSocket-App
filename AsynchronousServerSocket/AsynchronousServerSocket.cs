@@ -31,16 +31,15 @@ namespace AsynchronousServerSocket
         /// </summary>
         public class AsynchronousSocketListener
         {
-            // Thread signal.  
             public static ManualResetEvent allDone = new ManualResetEvent(false);
 
-            private const int Port = 11000;
-          //private const string Server = "localhost";
+            private const int Port = 3010;
             private const string Server = "127.0.0.1";
 
-            public AsynchronousSocketListener()
-            {
-            }
+            /// <summary>
+            /// Asynchronous Socket Listener default constructor
+            /// </summary>
+            public AsynchronousSocketListener() { }
 
             /// <summary>
             /// Start Listening to TCP/IP
@@ -114,8 +113,7 @@ namespace AsynchronousServerSocket
             {
                 String content = String.Empty;
 
-                // Retrieve the state object and the handler socket  
-                // from the asynchronous state object
+                // Retrieve the state object and handler socket from asynchronous state object
                 StateObject state = (StateObject)ar.AsyncState;
                 Socket handler = state.workSocket;
 
@@ -124,7 +122,7 @@ namespace AsynchronousServerSocket
 
                 if (bytesRead > 0)
                 {
-                    // There  might be more data, so store the data received so far
+                    // There might be more data, so store the data received so far
                     state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
 
                     // Check for end-of-file tag. If it is not there, read more data
